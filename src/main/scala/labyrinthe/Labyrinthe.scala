@@ -90,7 +90,8 @@ object Labyrinthe {
     *  @note Utiliser une fonction anonyme.
     *        La solution tient en une courte ligne.
     */
-  val agencementPlein: Agencement = ??? // TODO
+
+  val agencementPlein: Agencement = ??? // test TODO
 
   /** Agencement avec des murs nulle part
     */
