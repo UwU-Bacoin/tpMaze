@@ -41,11 +41,11 @@ object Labyrinthe {
 
     /* Identification de l'étudiant n°2 */
     Map(
-      "nom" -> "<à compléter>", // TODO compléter (garder les guillemets)
-      "prénom" -> "<à compléter>", // TODO compléter (garder les guillemets)
-      "numéro" -> "<à compléter>", // TODO compléter (garder les guillemets)
-      "email" -> "<à compléter>@etudiant.univ-rennes1.fr", // TODO compléter (garder les guillemets)
-      "emailEnseignant" -> "<à remplacer par une des adresses ci-dessus>" // TODO compléter (garder les guillemets)
+      "nom" -> "Merrer", // TODO compléter (garder les guillemets)
+      "prénom" -> "Nicolas", // TODO compléter (garder les guillemets)
+      "numéro" -> "22102431", // TODO compléter (garder les guillemets)
+      "email" -> "nicolas.merrer@etudiant.univ-rennes1.fr", // TODO compléter (garder les guillemets)
+      "emailEnseignant" -> "leo.cosseron@ens-rennes.fr" // TODO compléter (garder les guillemets)
     )
   )
 
@@ -90,6 +90,7 @@ object Labyrinthe {
     *  @note Utiliser une fonction anonyme.
     *        La solution tient en une courte ligne.
     */
+
   val agencementPlein: Agencement = ??? // test TODO
 
   /** Agencement avec des murs nulle part
