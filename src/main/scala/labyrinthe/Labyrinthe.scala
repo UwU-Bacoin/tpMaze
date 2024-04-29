@@ -41,11 +41,11 @@ object Labyrinthe {
 
     /* Identification de l'étudiant n°2 */
     Map(
-      "nom" -> "<à compléter>", // TODO compléter (garder les guillemets)
-      "prénom" -> "<à compléter>", // TODO compléter (garder les guillemets)
-      "numéro" -> "<à compléter>", // TODO compléter (garder les guillemets)
-      "email" -> "<à compléter>@etudiant.univ-rennes1.fr", // TODO compléter (garder les guillemets)
-      "emailEnseignant" -> "<à remplacer par une des adresses ci-dessus>" // TODO compléter (garder les guillemets)
+      "nom" -> "Merrer", // TODO compléter (garder les guillemets)
+      "prénom" -> "Nicolas", // TODO compléter (garder les guillemets)
+      "numéro" -> "22102431", // TODO compléter (garder les guillemets)
+      "email" -> "nicolas.merrer@etudiant.univ-rennes1.fr", // TODO compléter (garder les guillemets)
+      "emailEnseignant" -> "leo.cosseron@ens-rennes.fr" // TODO compléter (garder les guillemets)
     )
   )
 
@@ -90,11 +90,11 @@ object Labyrinthe {
     *  @note Utiliser une fonction anonyme.
     *        La solution tient en une courte ligne.
     */
-  val agencementPlein: Agencement = ??? // TODO 
+  val agencementPlein: Agencement = ??? // TODO
 
   /** Agencement avec des murs nulle part
     */
-  val agencementVide: Agencement = ??? // TODO 
+  val agencementVide: Agencement = ??? // TODO
 
   /** Type des labyrinthes
     *
@@ -126,7 +126,7 @@ object Labyrinthe {
     *       booléens.
     */
   def booleanToPassage(b: Boolean): Passage =
-    ??? // TODO 
+    ??? // TODO
 
   /** @param hauteur hauteur d'un labyrinthe
     * @param largeur largeur d'une labyrinthe
@@ -140,14 +140,14 @@ object Labyrinthe {
     *          ┣━┻━┻━┻━┛ ┃
     *          ┗━━━━━━━━━┛
     */
-  def couloirSudEst(hauteur: Int, largeur: Int): Agencement =  ??? // TODO 
+  def couloirSudEst(hauteur: Int, largeur: Int): Agencement = ??? // TODO
 
   /** @param nord un booléen
     * @param est un booléen
     * @return la cellule dont les passages Nord et Est sont spécifiés par les
     *         booléens donnés (true indiquant un passage ouvert)
     */
-  def booleansToCellule(nord: Boolean, est: Boolean): Cellule =  ??? // TODO 
+  def booleansToCellule(nord: Boolean, est: Boolean): Cellule = ??? // TODO
 
   /** @param hauteur nombre de lignes d'un labyrinthe
     * @param largeur nombre de colonnes d'un labyrinthe
@@ -165,11 +165,7 @@ object Labyrinthe {
     *          ┗━━━━━━━━━┛           ┣━━━━━━━╸ ┃
     *                                ┗━━━━━━━━━┛
     */
-  def serpentinH(hauteur: Int, largeur: Int): Agencement =  ??? // TODO 
-
-  
-
-  
+  def serpentinH(hauteur: Int, largeur: Int): Agencement = ??? // TODO
 
   /** @param hauteur nombre de lignes d'un labyrinthe
     * @param largeur nombre de colonnes d'un labyrinthe
@@ -182,7 +178,7 @@ object Labyrinthe {
       hauteur: Int,
       largeur: Int,
       g: (Int, Int) => Agencement
-  ): Labyrinthe =  ??? // TODO 
+  ): Labyrinthe = ??? // TODO
 
   /* Affichage graphique d'un labyrinthe */
 
@@ -192,14 +188,14 @@ object Labyrinthe {
     *         « sud-ouest. »
     */
   def entreeLabyrinthe(laby: Labyrinthe): Position =
-    ??? // TODO 
+    ??? // TODO
 
   /** @param laby un labyrinthe
     * @return la position de la sortie du labyrinthe laby,
     *         qui par convention est « au nord-est. »
     */
   def sortieLabyrinthe(laby: Labyrinthe): Position =
-    ??? // TODO 
+    ??? // TODO
 
   /** EtatLabyrinthe
     *
@@ -214,7 +210,7 @@ object Labyrinthe {
     *         la cellule d'entrée est la cellule courante
     *         et toutes les autres sont non visitées.
     */
-  def etatInitial(laby: Labyrinthe): EtatLabyrinthe =  ??? // TODO 
+  def etatInitial(laby: Labyrinthe): EtatLabyrinthe = ??? // TODO
 
   /** @param laby Un labyrinthe
     * @param etat Une fonction décrivant l'état de chaque cellule
@@ -232,12 +228,12 @@ object Labyrinthe {
       * @return optionnellement, le marqueur à placer dans la cellule de position
       *         p du labyrinthe laby.
       */
-    def marqueur(p: Position): Option[Image] =  ??? // TODO 
+    def marqueur(p: Position): Option[Image] = ??? // TODO
 
     /** @param p une position dans le labyrinthe laby
       * @return l'image de la cellule de laby à cette position
       */
-    def imageCellule(p: Position): Image =  ??? // TODO 
+    def imageCellule(p: Position): Image = ??? // TODO
 
     /** @param i un numéro de ligne du labyrinthe laby
       * @return l'image de cette ligne
@@ -247,10 +243,10 @@ object Labyrinthe {
       *
       *       (0 until n) étant la liste des nombres de 0 à n-1.
       */
-    def ligneToImage(i: Int): Image =  ??? // TODO 
+    def ligneToImage(i: Int): Image = ??? // TODO
 
     /** image du labyrinthe sans les enceintes extérieures */
-    val raw: Image =  ??? // TODO 
+    val raw: Image = ??? // TODO
 
     /* Ajout des enceintes entourant le labyrinthe
        Vous n'avez rien à compléter ci-dessous.
