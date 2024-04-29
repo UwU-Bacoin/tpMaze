@@ -91,7 +91,7 @@ object Labyrinthe {
     *        La solution tient en une courte ligne.
     */
 
-  val agencementPlein: Agencement = ??? // test TODO
+  val agencementPlein: Agencement = for (x in range (Position._0)){for (y in range (Position._1)){Cellule(Ferme, Ferme)}})
 
   /** Agencement avec des murs nulle part
     */
