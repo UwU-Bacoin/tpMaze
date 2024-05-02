@@ -95,8 +95,8 @@ object Labyrinthe {
   print(agencementPlein)
   /** Agencement avec des murs nulle part
     */
-  val agencementVide: Agencement = ??? // TODO
-
+  val agencementVide: Agencement = Position => Cellule(Ouvert,Ouvert)
+  print(agencementVide)
   /** Type des labyrinthes
     *
     * @constructor crée un nouveau labyrinthe.
