@@ -32,20 +32,20 @@ object Labyrinthe {
   val authors = List(
     /* Identification de l'étudiant n°1 */
     Map(
-      "nom" -> "Videcoq", // TODO compléter (garder les guillemets)
-      "prénom" -> "Lucas", // TODO compléter (garder les guillemets)
-      "numéro" -> "23111447", // TODO compléter (garder les guillemets)
-      "email" -> "lucas.videcoq@etudiant.univ-rennes1.fr", // TODO compléter (garder les guillemets)
-      "emailEnseignant" -> "leo.cosseron@ens-rennes.fr" // TODO compléter (garder les guillemets)
+      "nom" -> "Videcoq", 
+      "prénom" -> "Lucas", 
+      "numéro" -> "23111447", 
+      "email" -> "lucas.videcoq@etudiant.univ-rennes1.fr", 
+      "emailEnseignant" -> "leo.cosseron@ens-rennes.fr" 
     ),
 
     /* Identification de l'étudiant n°2 */
     Map(
-      "nom" -> "Merrer", // TODO compléter (garder les guillemets)
-      "prénom" -> "Nicolas", // TODO compléter (garder les guillemets)
-      "numéro" -> "22102431", // TODO compléter (garder les guillemets)
-      "email" -> "nicolas.merrer@etudiant.univ-rennes1.fr", // TODO compléter (garder les guillemets)
-      "emailEnseignant" -> "leo.cosseron@ens-rennes.fr" // TODO compléter (garder les guillemets)
+      "nom" -> "Merrer", 
+      "prénom" -> "Nicolas", 
+      "numéro" -> "22102431", 
+      "email" -> "nicolas.merrer@etudiant.univ-rennes1.fr", 
+      "emailEnseignant" -> "leo.cosseron@ens-rennes.fr" 
     )
   )
 
@@ -91,8 +91,8 @@ object Labyrinthe {
     *        La solution tient en une courte ligne.
     */
 
-  val agencementPlein: Agencement = for (x in range (Position._0)){for (y in range (Position._1)){Cellule(Ferme, Ferme)}})
-
+  val agencementPlein: Agencement = Position => Cellule(Ferme,Ferme) // ( Position => for (x in range (Position._0)){for (y in range (Position._1)){Cellule(Ferme, Ferme)}})
+  print(agencementPlein)
   /** Agencement avec des murs nulle part
     */
   val agencementVide: Agencement = ??? // TODO
