@@ -1,6 +1,7 @@
 package labyrinthe
 import Cellule.*
 import fr.istic.scribble.*
+import labyrinthe.Labyrinthe.EtatLabyrinthe
 
 object Labyrinthe {
 
@@ -217,7 +218,8 @@ object Labyrinthe {
     *         la cellule d'entrée est la cellule courante
     *         et toutes les autres sont non visitées.
     */
-  def etatInitial(laby: Labyrinthe): EtatLabyrinthe = ??? // TODO
+  def etatInitial(laby: Labyrinthe): EtatLabyrinthe = EtatLabyrinthe(0, 0) =
+    Courante(Nil) // TODO
 
   /** @param laby Un labyrinthe
     * @param etat Une fonction décrivant l'état de chaque cellule
