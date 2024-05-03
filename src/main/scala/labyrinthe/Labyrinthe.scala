@@ -1,6 +1,7 @@
 package labyrinthe
 import Cellule.*
 import fr.istic.scribble.*
+import labyrinthe.Labyrinthe.EtatLabyrinthe
 
 object Labyrinthe {
 
@@ -32,20 +33,20 @@ object Labyrinthe {
   val authors = List(
     /* Identification de l'étudiant n°1 */
     Map(
-      "nom" -> "Videcoq", // TODO compléter (garder les guillemets)
-      "prénom" -> "Lucas", // TODO compléter (garder les guillemets)
-      "numéro" -> "23111447", // TODO compléter (garder les guillemets)
-      "email" -> "lucas.videcoq@etudiant.univ-rennes1.fr", // TODO compléter (garder les guillemets)
-      "emailEnseignant" -> "leo.cosseron@ens-rennes.fr" // TODO compléter (garder les guillemets)
+      "nom" -> "Videcoq",
+      "prénom" -> "Lucas",
+      "numéro" -> "23111447",
+      "email" -> "lucas.videcoq@etudiant.univ-rennes1.fr",
+      "emailEnseignant" -> "leo.cosseron@ens-rennes.fr"
     ),
 
     /* Identification de l'étudiant n°2 */
     Map(
-      "nom" -> "Merrer", // TODO compléter (garder les guillemets)
-      "prénom" -> "Nicolas", // TODO compléter (garder les guillemets)
-      "numéro" -> "22102431", // TODO compléter (garder les guillemets)
-      "email" -> "nicolas.merrer@etudiant.univ-rennes1.fr", // TODO compléter (garder les guillemets)
-      "emailEnseignant" -> "leo.cosseron@ens-rennes.fr" // TODO compléter (garder les guillemets)
+      "nom" -> "Merrer",
+      "prénom" -> "Nicolas",
+      "numéro" -> "22102431",
+      "email" -> "nicolas.merrer@etudiant.univ-rennes1.fr",
+      "emailEnseignant" -> "leo.cosseron@ens-rennes.fr"
     )
   )
 
@@ -91,11 +92,16 @@ object Labyrinthe {
     *        La solution tient en une courte ligne.
     */
 
-  val agencementPlein: Agencement = ??? // test TODO
+  val agencementPlein: Agencement =
+    Position =>
+      Cellule(
+        Ferme,
+        Ferme
+      ) // ( Position => for (x in range (Position._0)){for (y in range (Position._1)){Cellule(Ferme, Ferme)}})
 
   /** Agencement avec des murs nulle part
     */
-  val agencementVide: Agencement = ??? // TODO
+  val agencementVide: Agencement = Position => Cellule(Ouvert, Ouvert)
 
   /** Type des labyrinthes
     *
@@ -126,8 +132,9 @@ object Labyrinthe {
     * @note utile pour créer des agencements par manipulations de
     *       booléens.
     */
-  def booleanToPassage(b: Boolean): Passage =
-    ??? // TODO
+  def booleanToPassage(b: Boolean): Passage = {
+    if b then Ouvert else Ferme
+  }
 
   /** @param hauteur hauteur d'un labyrinthe
     * @param largeur largeur d'une labyrinthe
@@ -179,7 +186,7 @@ object Labyrinthe {
       hauteur: Int,
       largeur: Int,
       g: (Int, Int) => Agencement
-  ): Labyrinthe = ??? // TODO
+  ): Labyrinthe = Labyrinthe(hauteur, largeur, g(hauteur, largeur))
 
   /* Affichage graphique d'un labyrinthe */
 
@@ -189,14 +196,14 @@ object Labyrinthe {
     *         « sud-ouest. »
     */
   def entreeLabyrinthe(laby: Labyrinthe): Position =
-    ??? // TODO
+    (laby.hauteur, 0)
 
-  /** @param laby un labyrinthe
-    * @return la position de la sortie du labyrinthe laby,
-    *         qui par convention est « au nord-est. »
-    */
+    /** @param laby un labyrinthe
+      * @return la position de la sortie du labyrinthe laby,
+      *         qui par convention est « au nord-est. »
+      */
   def sortieLabyrinthe(laby: Labyrinthe): Position =
-    ??? // TODO
+    (0, 0)
 
   /** EtatLabyrinthe
     *
@@ -211,7 +218,8 @@ object Labyrinthe {
     *         la cellule d'entrée est la cellule courante
     *         et toutes les autres sont non visitées.
     */
-  def etatInitial(laby: Labyrinthe): EtatLabyrinthe = ??? // TODO
+  def etatInitial(laby: Labyrinthe): EtatLabyrinthe = EtatLabyrinthe(0, 0) =
+    Courante(Nil) // TODO
 
   /** @param laby Un labyrinthe
     * @param etat Une fonction décrivant l'état de chaque cellule
