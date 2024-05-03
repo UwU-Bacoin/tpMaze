@@ -134,7 +134,7 @@ object Labyrinthe {
     */
   def booleanToPassage(b: Boolean): Passage = {
     if b then Ouvert else Ferme
-  } // TODO
+  }
 
   /** @param hauteur hauteur d'un labyrinthe
     * @param largeur largeur d'une labyrinthe
