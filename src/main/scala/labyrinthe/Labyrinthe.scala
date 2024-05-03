@@ -185,7 +185,7 @@ object Labyrinthe {
       hauteur: Int,
       largeur: Int,
       g: (Int, Int) => Agencement
-  ): Labyrinthe = ??? // TODO
+  ): Labyrinthe = Labyrinthe(hauteur, largeur, g(hauteur, largeur))
 
   /* Affichage graphique d'un labyrinthe */
 
@@ -195,14 +195,14 @@ object Labyrinthe {
     *         « sud-ouest. »
     */
   def entreeLabyrinthe(laby: Labyrinthe): Position =
-    ??? // TODO
+    (laby.hauteur, 0)
 
-  /** @param laby un labyrinthe
-    * @return la position de la sortie du labyrinthe laby,
-    *         qui par convention est « au nord-est. »
-    */
+    /** @param laby un labyrinthe
+      * @return la position de la sortie du labyrinthe laby,
+      *         qui par convention est « au nord-est. »
+      */
   def sortieLabyrinthe(laby: Labyrinthe): Position =
-    ??? // TODO
+    (0, 0)
 
   /** EtatLabyrinthe
     *

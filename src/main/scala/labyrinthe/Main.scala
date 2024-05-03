@@ -22,5 +22,4 @@ object Main extends App {
      touche « entrée » afin que le jeu ne s'arrête pas immédiatement. */
 
   val _ = scala.io.StdIn.readLine()
-
 }
