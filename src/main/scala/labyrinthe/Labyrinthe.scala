@@ -32,20 +32,20 @@ object Labyrinthe {
   val authors = List(
     /* Identification de l'étudiant n°1 */
     Map(
-      "nom" -> "Videcoq", 
-      "prénom" -> "Lucas", 
-      "numéro" -> "23111447", 
-      "email" -> "lucas.videcoq@etudiant.univ-rennes1.fr", 
-      "emailEnseignant" -> "leo.cosseron@ens-rennes.fr" 
+      "nom" -> "Videcoq",
+      "prénom" -> "Lucas",
+      "numéro" -> "23111447",
+      "email" -> "lucas.videcoq@etudiant.univ-rennes1.fr",
+      "emailEnseignant" -> "leo.cosseron@ens-rennes.fr"
     ),
 
     /* Identification de l'étudiant n°2 */
     Map(
-      "nom" -> "Merrer", 
-      "prénom" -> "Nicolas", 
-      "numéro" -> "22102431", 
-      "email" -> "nicolas.merrer@etudiant.univ-rennes1.fr", 
-      "emailEnseignant" -> "leo.cosseron@ens-rennes.fr" 
+      "nom" -> "Merrer",
+      "prénom" -> "Nicolas",
+      "numéro" -> "22102431",
+      "email" -> "nicolas.merrer@etudiant.univ-rennes1.fr",
+      "emailEnseignant" -> "leo.cosseron@ens-rennes.fr"
     )
   )
 
@@ -91,12 +91,17 @@ object Labyrinthe {
     *        La solution tient en une courte ligne.
     */
 
-  val agencementPlein: Agencement = Position => Cellule(Ferme,Ferme) // ( Position => for (x in range (Position._0)){for (y in range (Position._1)){Cellule(Ferme, Ferme)}})
-  print(agencementPlein)
+  val agencementPlein: Agencement =
+    Position =>
+      Cellule(
+        Ferme,
+        Ferme
+      ) // ( Position => for (x in range (Position._0)){for (y in range (Position._1)){Cellule(Ferme, Ferme)}})
+
   /** Agencement avec des murs nulle part
     */
-  val agencementVide: Agencement = Position => Cellule(Ouvert,Ouvert)
-  print(agencementVide)
+  val agencementVide: Agencement = Position => Cellule(Ouvert, Ouvert)
+
   /** Type des labyrinthes
     *
     * @constructor crée un nouveau labyrinthe.
@@ -126,8 +131,9 @@ object Labyrinthe {
     * @note utile pour créer des agencements par manipulations de
     *       booléens.
     */
-  def booleanToPassage(b: Boolean): Passage =
-    ??? // TODO
+  def booleanToPassage(b: Boolean): Passage = {
+    if b then Ouvert else Ferme
+  } // TODO
 
   /** @param hauteur hauteur d'un labyrinthe
     * @param largeur largeur d'une labyrinthe
