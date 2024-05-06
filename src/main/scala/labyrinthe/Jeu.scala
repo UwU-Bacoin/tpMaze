@@ -72,7 +72,11 @@ object Jeu {
     * @param d une direction
     * @return la position voisine de pos, suivant direction
     */
-  def voisine(p: Position, d: Direction): Position = ??? // TODO
+  def voisine(p: Position, d: Direction): Position = (d, p) match
+    case (Nord, (x, y))  => (x - 1, y)
+    case (Sud, (x, y))   => (x + 1, y)
+    case (Est, (x, y))   => (x, y + 1)
+    case (Ouest, (x, y)) => (x, y - 1)
 
   /** @param laby un labyrinthe
     * @param p une position
