@@ -27,31 +27,36 @@ object Jeu {
   /** @param chemin un chemin de labyrinthe
     * @return la position du joueur dans le labyrinthe selon le chemin donné
     */
-  def positionCourante(chemin: Chemin): Position = ??? // TODO 
+  def positionCourante(chemin: Chemin): Position = chemin match
+    case x :: _ => x
 
   /** @param p une position dans un labyrinthe
     * @param chemin un chemin d'un labyrinthe
     * @return true ssi la position p est la position courante du joueur selon le
     *         chemin donné.
     */
-  def estPositionCourante(p: Position, chemin: Chemin): Boolean =  ??? // TODO 
+  def estPositionCourante(p: Position, chemin: Chemin): Boolean =
+    p == positionCourante(chemin)
 
   /** @param laby un labyrinthe
     * @param chemin un chemin dans laby
     * @return vrai ssi le chemin mène à la sortie de laby.
     */
-  def estResolu(laby: Labyrinthe, chemin: Chemin): Boolean =  ??? // TODO 
+  def estResolu(laby: Labyrinthe, chemin: Chemin): Boolean = chemin match
+    case x :: _ => x == sortieLabyrinthe(laby)
 
   /** @param laby un labyrinthe
     * @return le chemin initial, c'est-à-dire celui avec lequel on commence à jouer.
     */
-  def cheminInitial(laby: Labyrinthe): Chemin =  ??? // TODO 
+  def cheminInitial(laby: Labyrinthe): Chemin = entreeLabyrinthe(laby) :: Nil
 
   /** @param chemin un chemin
     * @return le chemin correspondant à l'annulation du dernier déplacement dans chemin,
     *         si des déplacements ont déjà été effectués.
     */
-  def annulerBouger(chemin: Chemin): Chemin =  ??? // TODO 
+  def annulerBouger(chemin: Chemin): Chemin = chemin match
+    case x :: Nil => chemin
+    case x :: y   => y
 
   /** Directions des déplacements dans un labyrinthe */
   sealed trait Direction
@@ -67,7 +72,7 @@ object Jeu {
     * @param d une direction
     * @return la position voisine de pos, suivant direction
     */
-  def voisine(p: Position, d: Direction): Position =  ??? // TODO 
+  def voisine(p: Position, d: Direction): Position = ??? // TODO
 
   /** @param laby un labyrinthe
     * @param p une position
@@ -88,7 +93,7 @@ object Jeu {
       laby: Labyrinthe,
       p: Position,
       d: Direction
-  ): Boolean =  ??? // TODO 
+  ): Boolean = ??? // TODO
 
   /** @param laby un labyrinthe
     * @param p une position dans laby
@@ -96,7 +101,7 @@ object Jeu {
     *
     * @note utiliser directions, filter et map
     */
-  def voisines(laby: Labyrinthe, p: Position): List[Position] =  ??? // TODO 
+  def voisines(laby: Labyrinthe, p: Position): List[Position] = ??? // TODO
 
   /** @param laby un labyrinthe
     * @param chemin un chemin dans le labyrinthe laby
@@ -108,7 +113,7 @@ object Jeu {
       laby: Labyrinthe,
       chemin: Chemin,
       direction: Direction
-  ): Chemin =  ??? // TODO 
+  ): Chemin = ??? // TODO
 
   /** @param p0 une position dans un labyrinthe
     * @param p1 une position dans un labyrinthe
@@ -116,7 +121,7 @@ object Jeu {
     *
     * @note indication de longueur : moins de 10 lignes
     */
-  def directionDeplacement(p0: Position, p1: Position): Direction =  ??? // TODO 
+  def directionDeplacement(p0: Position, p1: Position): Direction = ??? // TODO
 
   /** @param chemin un chemin
     * @return la direction dans laquelle se déplace le joueur ayant suivi ce chemin,
@@ -127,7 +132,7 @@ object Jeu {
     * @note indication de longueur : moins de 5 lignes
     * @note utiliser la fonction directionDeplacement
     */
-  def sensDeplacement(chemin: Chemin): Direction =  ??? // TODO 
+  def sensDeplacement(chemin: Chemin): Direction = ??? // TODO
 
   /** @param laby un labyrinthe
     * @param chemin un chemin dans le labyrinthe laby
@@ -156,7 +161,7 @@ object Jeu {
   def etatLabyrinthe(
       laby: Labyrinthe,
       chemin: Chemin
-  ): EtatLabyrinthe =  ??? // TODO 
+  ): EtatLabyrinthe = ??? // TODO
 
   /* ======================================*/
   /* RÉSOLUTION : recherche d'une solution */
@@ -193,7 +198,7 @@ object Jeu {
   def bougeStrategieMainDroite(
       laby: Labyrinthe,
       chemin: Chemin
-  ): Chemin =  ??? // TODO 
+  ): Chemin = ??? // TODO
 
   /** @param laby un labyrinthe parfait
     * @param chemin un chemin dans le labyrinthe laby
@@ -206,7 +211,7 @@ object Jeu {
   def resoudreParStrategieMainDroite(
       laby: Labyrinthe,
       chemin: Chemin
-  ): Chemin =  ??? // TODO 
+  ): Chemin = ??? // TODO
 
   /** @param chemin un chemin d'un labyrinthe
     * @return le chemin obetenu en enlevant les détours éventuels du chemin
@@ -221,7 +226,7 @@ object Jeu {
     * @note   Notre solution utilise la méthode span
     *         Cf. https://www.scala-lang.org/api/2.13.3/scala/collection/immutable/List.html#span(p:A=%3EBoolean):(List[A],List[A])
     */
-  def simplifie(chemin: Chemin): Chemin =  ??? // TODO 
+  def simplifie(chemin: Chemin): Chemin = ??? // TODO
 
   /** @param laby un labyrinthe parfait
     * @param chemin un chemin dans le labyrinthe laby
@@ -236,7 +241,7 @@ object Jeu {
     *
     * @note utiliser les fonctions simplifie et resoudreParStrategieMainDroite
     */
-  def resoudre(laby: Labyrinthe, chemin: Chemin): Chemin =  ??? // TODO 
+  def resoudre(laby: Labyrinthe, chemin: Chemin): Chemin = ??? // TODO
 
   /** @param laby un labyrinthe parfait
     * @param chemin un chemin valide dans le labyrinthe laby
@@ -249,7 +254,7 @@ object Jeu {
     *       peut être utile. xs.takeRight(n) renvoie les n derniers
     *       éléments de la liste xs.
     */
-  def indice(laby: Labyrinthe, chemin: Chemin): Chemin =  ??? // TODO 
+  def indice(laby: Labyrinthe, chemin: Chemin): Chemin = ??? // TODO
 
   /* RÉSOLUTION PAR FORCE BRUTE (Très difficile)
      ===========================================
@@ -285,7 +290,7 @@ object Jeu {
   def etendreCheminJusquaArrivee(
       laby: Labyrinthe,
       chemin: Chemin
-  ): Chemin =  ??? // TODO 
+  ): Chemin = ??? // TODO
 
   /** @param laby un labyrinthe parfait
     * @param chemin un chemin dans le labyrinthe laby
@@ -303,7 +308,7 @@ object Jeu {
   def resoudreForceBrute(
       laby: Labyrinthe,
       chemin: Chemin
-  ): Chemin =  ??? // TODO 
+  ): Chemin = ??? // TODO
 
   /** @param laby un labyrinthe parfait
     * @param chemin un chemin valide dans le labyrinthe laby
@@ -314,6 +319,6 @@ object Jeu {
     *
     * @note Utiliser la fonction resoudreForceBrute
     */
-  def indiceForceBrute(laby: Labyrinthe, chemin: Chemin): Chemin =  ??? // TODO 
+  def indiceForceBrute(laby: Labyrinthe, chemin: Chemin): Chemin = ??? // TODO
 
 }
