@@ -2,6 +2,7 @@ package labyrinthe
 import Cellule.*
 import fr.istic.scribble.*
 import labyrinthe.Labyrinthe.EtatLabyrinthe
+import labyrinthe.Main.laby
 
 object Labyrinthe {
 
@@ -218,8 +219,12 @@ object Labyrinthe {
     *         la cellule d'entrée est la cellule courante
     *         et toutes les autres sont non visitées.
     */
-  def etatInitial(laby: Labyrinthe): EtatLabyrinthe = EtatLabyrinthe(0, 0) =
-    Courante(Nil) // TODO
+  def etatInitial(laby: Labyrinthe): EtatLabyrinthe = { p =>
+    p match {
+      case (laby.hauteur, 0) => Courante(Nil)
+      case _                 => NonVisitee
+    }
+  }
 
   /** @param laby Un labyrinthe
     * @param etat Une fonction décrivant l'état de chaque cellule
@@ -231,48 +236,65 @@ object Labyrinthe {
     *       Indication de longueur : une vingtaine de lignes au total,
     *       décomposées en fonctions ou expressions auxiliaires courtes.
     */
-  def labToImage(laby: Labyrinthe, etat: EtatLabyrinthe): Image =
+  def labToImage(laby: Labyrinthe, etat: EtatLabyrinthe): Image = {
+    val y = laby.hauteur
+    val x = laby.largeur
+    p: Tuple =>
+      (x, y) match {
+        case (0, 0) =>
+          celluleToImage(laby.f((0, 0)), Some(marqueurSortie), etat((0, 0)))
+        case (laby.hauteur, 0) =>
+          celluleToImage(
+            laby.f((laby.hauteur, 0)),
+            Some(marqueurEntree),
+            etat((laby.hauteur, 0))
+          )
+        case _ => celluleToImage(laby.f((x, y)), None, etat((x, y)))
+      }
+  }
 
-    /** @param p une position dans le labyrinthe laby
-      * @return optionnellement, le marqueur à placer dans la cellule de position
-      *         p du labyrinthe laby.
-      */
-    def marqueur(p: Position): Option[Image] = ??? // TODO
+  // TODO
 
-    /** @param p une position dans le labyrinthe laby
-      * @return l'image de la cellule de laby à cette position
-      */
-    def imageCellule(p: Position): Image = ??? // TODO
+  /** @param p une position dans le labyrinthe laby
+    * @return optionnellement, le marqueur à placer dans la cellule de position
+    *         p du labyrinthe laby.
+    */
+  def marqueur(p: Position): Option[Image] = ??? // TODO
 
-    /** @param i un numéro de ligne du labyrinthe laby
-      * @return l'image de cette ligne
-      *
-      * @note une solution courte est de la forme
-      *       (0 until laby.largeur).foldRight ...
-      *
-      *       (0 until n) étant la liste des nombres de 0 à n-1.
-      */
-    def ligneToImage(i: Int): Image = ??? // TODO
+  /** @param p une position dans le labyrinthe laby
+    * @return l'image de la cellule de laby à cette position
+    */
+  def imageCellule(p: Position): Image = ??? // TODO
 
-    /** image du labyrinthe sans les enceintes extérieures */
-    val raw: Image = ??? // TODO
+  /** @param i un numéro de ligne du labyrinthe laby
+    * @return l'image de cette ligne
+    *
+    * @note une solution courte est de la forme
+    *       (0 until laby.largeur).foldRight ...
+    *
+    *       (0 until n) étant la liste des nombres de 0 à n-1.
+    */
+  def ligneToImage(i: Int): Image = ??? // TODO
 
-    /* Ajout des enceintes entourant le labyrinthe
+  /** image du labyrinthe sans les enceintes extérieures */
+  val raw: Image = ??? // TODO
+
+  /* Ajout des enceintes entourant le labyrinthe
        Vous n'avez rien à compléter ci-dessous.
-     */
-    val enceinteH: Image = black(
-      Rectangle(laby.largeur * taille_cellule, epaisseur_mur)
-    )
-    val enceinteV: Image = black(
-      Rectangle(epaisseur_mur, laby.hauteur * taille_cellule)
-    )
+   */
+  val enceinteH: Image = black(
+    Rectangle(laby.largeur * taille_cellule, epaisseur_mur)
+  )
+  val enceinteV: Image = black(
+    Rectangle(epaisseur_mur, laby.hauteur * taille_cellule)
+  )
 
-    Below(
-      Beside(
-        enceinteV,
-        onAlign(Right, enceinteV, onAlign(Top, enceinteH, raw))
-      ),
-      Beside(jointure, enceinteH)
-    )
+  Below(
+    Beside(
+      enceinteV,
+      onAlign(Right, enceinteV, onAlign(Top, enceinteH, raw))
+    ),
+    Beside(jointure, enceinteH)
+  )
 
 }
