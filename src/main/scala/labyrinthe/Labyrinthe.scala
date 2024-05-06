@@ -251,50 +251,60 @@ object Labyrinthe {
           )
         case _ => celluleToImage(laby.f((x, y)), None, etat((x, y)))
       }
-  }
 
-  // TODO
+    // TODO
 
-  /** @param p une position dans le labyrinthe laby
-    * @return optionnellement, le marqueur à placer dans la cellule de position
-    *         p du labyrinthe laby.
-    */
-  def marqueur(p: Position): Option[Image] = ??? // TODO
+    /** @param p une position dans le labyrinthe laby
+      * @return optionnellement, le marqueur à placer dans la cellule de position
+      *         p du labyrinthe laby.
+      */
+    def marqueur(p: Position): Option[Image] = {} // TODO
 
-  /** @param p une position dans le labyrinthe laby
-    * @return l'image de la cellule de laby à cette position
-    */
-  def imageCellule(p: Position): Image = ??? // TODO
+    /** @param p une position dans le labyrinthe laby
+      * @return l'image de la cellule de laby à cette position
+      */
+    def imageCellule(p: Position): Image = p match {
+      case (0, 0) =>
+        celluleToImage(laby.f((0, 0)), Some(marqueurSortie), etat((0, 0)))
+      case (laby.hauteur, 0) =>
+        celluleToImage(
+          laby.f((laby.hauteur, 0)),
+          Some(marqueurEntree),
+          etat((laby.hauteur, 0))
+        )
+      case _ =>
+        celluleToImage(laby.f(p), None, etat(p))
 
-  /** @param i un numéro de ligne du labyrinthe laby
-    * @return l'image de cette ligne
-    *
-    * @note une solution courte est de la forme
-    *       (0 until laby.largeur).foldRight ...
-    *
-    *       (0 until n) étant la liste des nombres de 0 à n-1.
-    */
-  def ligneToImage(i: Int): Image = ??? // TODO
+        /** @param i un numéro de ligne du labyrinthe laby
+          * @return l'image de cette ligne
+          *
+          * @note une solution courte est de la forme
+          *       (0 until laby.largeur).foldRight ...
+          *
+          *       (0 until n) étant la liste des nombres de 0 à n-1.
+          */
+        def ligneToImage(i: Int): Image = ??? // TODO
 
-  /** image du labyrinthe sans les enceintes extérieures */
-  val raw: Image = ??? // TODO
+        /** image du labyrinthe sans les enceintes extérieures */
+        val raw: Image = ??? // TODO
 
-  /* Ajout des enceintes entourant le labyrinthe
+        /* Ajout des enceintes entourant le labyrinthe
        Vous n'avez rien à compléter ci-dessous.
-   */
-  val enceinteH: Image = black(
-    Rectangle(laby.largeur * taille_cellule, epaisseur_mur)
-  )
-  val enceinteV: Image = black(
-    Rectangle(epaisseur_mur, laby.hauteur * taille_cellule)
-  )
+         */
+        val enceinteH: Image = black(
+          Rectangle(laby.largeur * taille_cellule, epaisseur_mur)
+        )
+        val enceinteV: Image = black(
+          Rectangle(epaisseur_mur, laby.hauteur * taille_cellule)
+        )
 
-  Below(
-    Beside(
-      enceinteV,
-      onAlign(Right, enceinteV, onAlign(Top, enceinteH, raw))
-    ),
-    Beside(jointure, enceinteH)
-  )
-
+        Below(
+          Beside(
+            enceinteV,
+            onAlign(Right, enceinteV, onAlign(Top, enceinteH, raw))
+          ),
+          Beside(jointure, enceinteH)
+        )
+    }
+  }
 }
