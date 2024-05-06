@@ -15,7 +15,7 @@ object Main extends App {
   /* Décommentez la ligne suivante une fois que les fonctions labToImage et
      etatLabyrinthe sont définies : */
 
-  // bigbang(new GameUniverse(laby))
+  bigbang(new GameUniverse(laby))
 
   /* Si vous lancez cette application avec `sbt run` depuis un terminal,
      décommentez la ligne ci-dessous qui attend que l'utilisateur appuie sur la

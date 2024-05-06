@@ -238,8 +238,6 @@ object Labyrinthe {
     */
   def labToImage(laby: Labyrinthe, etat: EtatLabyrinthe): Image = {
 
-    // TODO
-
     /** @param p une position dans le labyrinthe laby
       * @return optionnellement, le marqueur à placer dans la cellule de position
       *         p du labyrinthe laby.
@@ -266,10 +264,17 @@ object Labyrinthe {
       *
       *       (0 until n) étant la liste des nombres de 0 à n-1.
       */
-    def ligneToImage(i: Int): Image = (0 until laby.largeur) // TODO
+    def ligneToImage(i: Int): Image = {
+      (0 until laby.largeur).foldRight(Empty)((y: Int, acc: Image) =>
+        Beside(imageCellule((i, y)), acc)
+      )
+    }
 
     /** image du labyrinthe sans les enceintes extérieures */
-    val raw: Image = ??? // TODO
+    val raw: Image =
+      (0 until laby.hauteur).foldRight(Empty)((i: Int, acc: Image) =>
+        Below(ligneToImage(i), acc)
+      )
 
     /* Ajout des enceintes entourant le labyrinthe
        Vous n'avez rien à compléter ci-dessous.
