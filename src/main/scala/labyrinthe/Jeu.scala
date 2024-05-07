@@ -27,8 +27,10 @@ object Jeu {
   /** @param chemin un chemin de labyrinthe
     * @return la position du joueur dans le labyrinthe selon le chemin donné
     */
-  def positionCourante(chemin: Chemin): Position = chemin match
-    case x :: _ => x
+  def positionCourante(chemin: Chemin): Position = {
+    chemin match
+      case x :: _ => x
+  }
 
   /** @param p une position dans un labyrinthe
     * @param chemin un chemin d'un labyrinthe
@@ -42,8 +44,10 @@ object Jeu {
     * @param chemin un chemin dans laby
     * @return vrai ssi le chemin mène à la sortie de laby.
     */
-  def estResolu(laby: Labyrinthe, chemin: Chemin): Boolean = chemin match
-    case x :: _ => x == sortieLabyrinthe(laby)
+  def estResolu(laby: Labyrinthe, chemin: Chemin): Boolean = {
+    chemin match
+      case x :: _ => x == sortieLabyrinthe(laby)
+  }
 
   /** @param laby un labyrinthe
     * @return le chemin initial, c'est-à-dire celui avec lequel on commence à jouer.
@@ -54,9 +58,11 @@ object Jeu {
     * @return le chemin correspondant à l'annulation du dernier déplacement dans chemin,
     *         si des déplacements ont déjà été effectués.
     */
-  def annulerBouger(chemin: Chemin): Chemin = chemin match
-    case x :: Nil => chemin
-    case x :: y   => y
+  def annulerBouger(chemin: Chemin): Chemin = {
+    chemin match
+      case x :: Nil => chemin
+      case x :: y   => y
+  }
 
   /** Directions des déplacements dans un labyrinthe */
   sealed trait Direction
@@ -98,13 +104,14 @@ object Jeu {
       p: Position,
       d: Direction
   ): Boolean = {
-    d match
+    d match {
       case Nord => laby.f(p) match { case Cellule(e, _) => e == Ouvert }
       case Est  => laby.f(p) match { case Cellule(_, e) => e == Ouvert }
       case Sud =>
         laby.f(voisine(p, d)) match { case Cellule(e, _) => e == Ouvert }
       case Ouest =>
         laby.f(voisine(p, d)) match { case Cellule(_, e) => e == Ouvert }
+    }
   }
 
   /** @param laby un labyrinthe
