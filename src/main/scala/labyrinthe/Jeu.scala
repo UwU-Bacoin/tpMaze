@@ -97,7 +97,15 @@ object Jeu {
       laby: Labyrinthe,
       p: Position,
       d: Direction
-  ): Boolean = ??? // TODO
+  ): Boolean = {
+    d match
+      case Nord => laby.f(p) match { case Cellule(e, _) => e == Ouvert }
+      case Est  => laby.f(p) match { case Cellule(_, e) => e == Ouvert }
+      case Sud =>
+        laby.f(voisine(p, d)) match { case Cellule(e, _) => e == Ouvert }
+      case Ouest =>
+        laby.f(voisine(p, d)) match { case Cellule(_, e) => e == Ouvert }
+  }
 
   /** @param laby un labyrinthe
     * @param p une position dans laby
