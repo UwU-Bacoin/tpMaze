@@ -230,7 +230,57 @@ object Jeu {
   def bougeStrategieMainDroite(
       laby: Labyrinthe,
       chemin: Chemin
-  ): Chemin = ??? // TODO
+  ): Chemin = {
+    sensDeplacement(chemin) match
+      case Est =>
+        (
+          passageOuvert(laby, chemin.head, Sud),
+          passageOuvert(laby, chemin.head, Est),
+          passageOuvert(laby, chemin.head, Nord),
+          passageOuvert(laby, chemin.head, Ouest)
+        ) match {
+          case (true, _, _, _) => bouge(laby, chemin, Sud)
+          case (_, true, _, _) => bouge(laby, chemin, Est)
+          case (_, _, true, _) => bouge(laby, chemin, Nord)
+          case _               => bouge(laby, chemin, Ouest)
+        }
+      case Nord =>
+        (
+          passageOuvert(laby, chemin.head, Est),
+          passageOuvert(laby, chemin.head, Nord),
+          passageOuvert(laby, chemin.head, Ouest),
+          passageOuvert(laby, chemin.head, Sud)
+        ) match {
+          case (true, _, _, _) => bouge(laby, chemin, Est)
+          case (_, true, _, _) => bouge(laby, chemin, Nord)
+          case (_, _, true, _) => bouge(laby, chemin, Ouest)
+          case _               => bouge(laby, chemin, Sud)
+        }
+      case Ouest =>
+        (
+          passageOuvert(laby, chemin.head, Nord),
+          passageOuvert(laby, chemin.head, Ouest),
+          passageOuvert(laby, chemin.head, Sud),
+          passageOuvert(laby, chemin.head, Est)
+        ) match {
+          case (true, _, _, _) => bouge(laby, chemin, Nord)
+          case (_, true, _, _) => bouge(laby, chemin, Ouest)
+          case (_, _, true, _) => bouge(laby, chemin, Sud)
+          case _               => bouge(laby, chemin, Est)
+        }
+      case Sud =>
+        (
+          passageOuvert(laby, chemin.head, Ouest),
+          passageOuvert(laby, chemin.head, Sud),
+          passageOuvert(laby, chemin.head, Est),
+          passageOuvert(laby, chemin.head, Nord)
+        ) match {
+          case (true, _, _, _) => bouge(laby, chemin, Ouest)
+          case (_, true, _, _) => bouge(laby, chemin, Sud)
+          case (_, _, true, _) => bouge(laby, chemin, Est)
+          case _               => bouge(laby, chemin, Nord)
+        }
+  }
 
   /** @param laby un labyrinthe parfait
     * @param chemin un chemin dans le labyrinthe laby
@@ -243,7 +293,17 @@ object Jeu {
   def resoudreParStrategieMainDroite(
       laby: Labyrinthe,
       chemin: Chemin
-  ): Chemin = ??? // TODO
+  ): Chemin = {
+    chemin match
+      case x :: _ =>
+        if (x == sortieLabyrinthe(laby)) then { chemin }
+        else {
+          resoudreParStrategieMainDroite(
+            laby,
+            bougeStrategieMainDroite(laby, chemin)
+          )
+        }
+  }
 
   /** @param chemin un chemin d'un labyrinthe
     * @return le chemin obetenu en enlevant les détours éventuels du chemin
@@ -258,7 +318,13 @@ object Jeu {
     * @note   Notre solution utilise la méthode span
     *         Cf. https://www.scala-lang.org/api/2.13.3/scala/collection/immutable/List.html#span(p:A=%3EBoolean):(List[A],List[A])
     */
-  def simplifie(chemin: Chemin): Chemin = ??? // TODO
+  def simplifie(chemin: Chemin): Chemin = chemin match
+    case x :: Nil => x :: Nil
+    case x1 :: x2 :: xs =>
+      val (pVrai, pFaux) = xs.span(_ != x1)
+      if (pFaux.isEmpty) then x1 :: simplifie(x2 :: xs)
+      else simplifie(pFaux)
+    case Nil => Nil
 
   /** @param laby un labyrinthe parfait
     * @param chemin un chemin dans le labyrinthe laby
@@ -273,7 +339,9 @@ object Jeu {
     *
     * @note utiliser les fonctions simplifie et resoudreParStrategieMainDroite
     */
-  def resoudre(laby: Labyrinthe, chemin: Chemin): Chemin = ??? // TODO
+  def resoudre(laby: Labyrinthe, chemin: Chemin): Chemin = simplifie(
+    resoudreParStrategieMainDroite(laby, chemin)
+  ) ++ chemin
 
   /** @param laby un labyrinthe parfait
     * @param chemin un chemin valide dans le labyrinthe laby
@@ -286,7 +354,9 @@ object Jeu {
     *       peut être utile. xs.takeRight(n) renvoie les n derniers
     *       éléments de la liste xs.
     */
-  def indice(laby: Labyrinthe, chemin: Chemin): Chemin = ??? // TODO
+  def indice(laby: Labyrinthe, chemin: Chemin): Chemin = simplifie(
+    resoudre(laby, chemin).takeRight(chemin.length + 1)
+  )
 
   /* RÉSOLUTION PAR FORCE BRUTE (Très difficile)
      ===========================================
