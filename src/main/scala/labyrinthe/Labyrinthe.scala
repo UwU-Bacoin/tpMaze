@@ -149,14 +149,19 @@ object Labyrinthe {
     *          ┣━┻━┻━┻━┛ ┃
     *          ┗━━━━━━━━━┛
     */
-  def couloirSudEst(hauteur: Int, largeur: Int): Agencement = ??? // TODO
+  def couloirSudEst(hauteur: Int, largeur: Int): Agencement = (i, j) =>
+    (i == hauteur - 1, j == largeur - 1) match
+      case (_, true) => Cellule(Ouvert, Ferme)
+      case (true, _) => Cellule(Ferme, Ouvert)
+      case _         => Cellule(Ferme, Ferme)
 
   /** @param nord un booléen
     * @param est un booléen
     * @return la cellule dont les passages Nord et Est sont spécifiés par les
     *         booléens donnés (true indiquant un passage ouvert)
     */
-  def booleansToCellule(nord: Boolean, est: Boolean): Cellule = ??? // TODO
+  def booleansToCellule(nord: Boolean, est: Boolean): Cellule =
+    ??? // TODO // Je n'ai pas compris
 
   /** @param hauteur nombre de lignes d'un labyrinthe
     * @param largeur nombre de colonnes d'un labyrinthe
@@ -174,7 +179,10 @@ object Labyrinthe {
     *          ┗━━━━━━━━━┛           ┣━━━━━━━╸ ┃
     *                                ┗━━━━━━━━━┛
     */
-  def serpentinH(hauteur: Int, largeur: Int): Agencement = ??? // TODO
+  def serpentinH(hauteur: Int, largeur: Int): Agencement = (i, j) =>
+    (i % 2, j == 0, j == largeur - 1) match
+      case (0, true, _) | (1, _, true) => Cellule(Ouvert, Ouvert)
+      case _                           => Cellule(Ferme, Ouvert)
 
   /** @param hauteur nombre de lignes d'un labyrinthe
     * @param largeur nombre de colonnes d'un labyrinthe

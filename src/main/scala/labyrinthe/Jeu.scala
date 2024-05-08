@@ -120,7 +120,8 @@ object Jeu {
     *
     * @note utiliser directions, filter et map
     */
-  def voisines(laby: Labyrinthe, p: Position): List[Position] = ??? // TODO
+  def voisines(laby: Labyrinthe, p: Position): List[Position] =
+    directions.filter(y => passageOuvert(laby, p, y)).map(y => voisine(p, y))
 
   /** @param laby un labyrinthe
     * @param chemin un chemin dans le labyrinthe laby
@@ -132,7 +133,9 @@ object Jeu {
       laby: Labyrinthe,
       chemin: Chemin,
       direction: Direction
-  ): Chemin = ??? // TODO
+  ): Chemin = if passageOuvert(laby, chemin.head, direction)
+  then (voisine(chemin.head, direction) :: chemin)
+  else (chemin)
 
   /** @param p0 une position dans un labyrinthe
     * @param p1 une position dans un labyrinthe
@@ -140,7 +143,12 @@ object Jeu {
     *
     * @note indication de longueur : moins de 10 lignes
     */
-  def directionDeplacement(p0: Position, p1: Position): Direction = ??? // TODO
+  def directionDeplacement(p0: Position, p1: Position): Direction =
+    (p0._1 - p1._1, p0._2 - p1._2) match
+      case (-1, 0) => Nord
+      case (1, 0)  => Sud
+      case (0, -1) => Ouest
+      case (0, 1)  => Est
 
   /** @param chemin un chemin
     * @return la direction dans laquelle se déplace le joueur ayant suivi ce chemin,
@@ -151,7 +159,9 @@ object Jeu {
     * @note indication de longueur : moins de 5 lignes
     * @note utiliser la fonction directionDeplacement
     */
-  def sensDeplacement(chemin: Chemin): Direction = ??? // TODO
+  def sensDeplacement(chemin: Chemin): Direction = chemin match
+    case x :: y :: _ => directionDeplacement(x, y)
+    case _           => Est
 
   /** @param laby un labyrinthe
     * @param chemin un chemin dans le labyrinthe laby
@@ -180,7 +190,10 @@ object Jeu {
   def etatLabyrinthe(
       laby: Labyrinthe,
       chemin: Chemin
-  ): EtatLabyrinthe = ??? // TODO
+  ): EtatLabyrinthe = p =>
+    if p == positionCourante(chemin) then Courante(Nil)
+    else if chemin.contains(p) then Visitee(Nil)
+    else NonVisitee
 
   /* ======================================*/
   /* RÉSOLUTION : recherche d'une solution */
